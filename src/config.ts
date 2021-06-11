@@ -1,0 +1,19 @@
+// URL's, constants
+
+export const TIMEOUT_SEC = 15;
+
+export const COUNTRIES_URL = (codes: string[]) => `https://restcountries.eu/rest/v2/alpha?codes=${codes.map(code => `${code};`).join('')}`;
+
+const countries = 'aearataubebgbrcachcncocuczdeegfrgbgrhkhuidieilinitjpkrltlvmamxmyngnlnonzphplptrorsrusasesgsiskthtrtwuausveza';
+
+const countriesArr: string[] = [];
+
+for(let i = 0; i < countries.length; i+=2) {
+  countriesArr.push(`${countries[i]}${countries[i+1]}`);
+}
+
+const NEWS_API_KEY = '68a23fc789574f65a23b77c0de4e7aed';
+
+export const NEWS_API_TOP_URL = (country: string) => `https://newsapi.org/v2/top-headlines?country=${country}&pageSize=100&apiKey=${NEWS_API_KEY}`;
+
+export {countriesArr}

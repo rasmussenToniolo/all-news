@@ -1,0 +1,14 @@
+.hidden {
+  visibility: none;
+  opacity: 0;
+}
+
+.selected-selector-item {
+  background-color: $white;
+}
+
+.selected-cat {
+  color: $heavy-grey;
+  background-color: $very-light-grey;
+  transition: background-color 100ms linear, color 100ms linear;
+}
