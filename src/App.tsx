@@ -16,17 +16,24 @@ export const App = () => {
 
   const [category, setCategory] = useState('general');
 
-  const [newsData, setNewsData] = useState<any>();
+  const [newsData, setNewsData] = useState<model.AnalyzedNewsArr>();
 
-  async function getTopNews(country: string) {
-    const data = await model.fetchTopNews(country);
-    setNewsData(data);
-    console.log(data);
+  async function getNews(country: string, category: string) {
+    setNewsData(undefined);
+    try{
+      const data = await model.fetchNews(country, category);
+      setNewsData(data);
+      console.log(data);
+      
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
-    // getTopNews(selectedCountry);
-  }, [])
+    // getNews(selectedCountry, category);
+    console.log(searchQuery);
+  }, [selectedCountry, category])
 
   // Have a function that, once something is searched, when the user clicks on the search bar, all text on the search bar is selected so that the user can easily delete the query
 
@@ -40,7 +47,7 @@ export const App = () => {
         setSearchQuery={setSearchQuery}
       />
 
-      <Body />
+      <Body data={newsData} />
     </>
   )
 }

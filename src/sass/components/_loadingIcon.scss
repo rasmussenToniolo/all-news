@@ -1,0 +1,47 @@
+.loading-icon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  &__circle {
+    &-circle {
+      position: absolute;
+      width: 20rem;
+      height: 20rem;
+      border-radius: 50%;
+    }
+    
+    &-transparent {
+      z-index: 150;
+      background-color: $white;
+      animation-name: orbit;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+
+    &-color-box {
+      z-index: 140;
+      position: relative;
+      width: 20.5rem;
+      height: 20.5rem;
+      background-color: rgba(0,0,0, 0);
+      animation-name: orbit;
+      animation-duration: 1.4s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+
+      &--circle {
+        top: 0;
+        left: 0;
+        background-color: $medium-grey;
+      }
+    }
+  }
+}
+
+@keyframes orbit { 
+  from { -webkit-transform:rotate(0deg) } 
+  to { -webkit-transform:rotate(360deg) } 
+}

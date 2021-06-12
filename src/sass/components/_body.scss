@@ -1,0 +1,18 @@
+.body {
+  z-index: 15;
+  position: absolute;
+  top: 14rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-right: 1px solid $light-grey;
+  border-left: 1px solid $light-grey;
+  width: 115rem;
+  margin: 2rem 0;
+
+  &.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 20rem);
+  }
+}
