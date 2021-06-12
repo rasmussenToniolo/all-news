@@ -66,7 +66,17 @@ function analyzeData(data: SuccesfulNewsResponseArr) {
 
   const analyzedDataArticles = data.articles.map(article => {
     // Algorithm to analyze article
-    return {...article, priority: 1}
+    if(article.urlToImage && article.description && article.content) {
+      return {...article, priority: 1};
+    } else if(article.content && article.urlToImage) {
+      return {...article, priority: 2};
+    } else if(article.content && article.description) {
+      return {...article, priority: 3};
+    } else if(article.description) {
+      return {...article, priority: 4};
+    } else {
+      return {...article, priority: 5};
+    }
   });
 
   const analyzedData: AnalyzedNewsArr = {articles: analyzedDataArticles};
