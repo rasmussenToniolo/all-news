@@ -3,11 +3,14 @@
   border-radius: .6rem;
   background-color: $white;
   border: 2px solid $light-grey;
-  margin: 2rem;
+  margin: 2rem 4rem;
   box-shadow: 2px 2px .5rem $light-grey;
-  transition: border 100ms linear;
+  transition: border 100ms linear, transform 150ms ease-in-out;
 
   &:hover {
     border: 2px solid $medium-grey;
+    transform: scale(1.02);
   }
+
+  
 }

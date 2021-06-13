@@ -5,6 +5,8 @@ export async function getJSON(url: string) {
   
     if(!res.ok) throw new Error(`${res.status} - ${res.statusText}`);
 
+    console.log(res);
+
     const resJSON = await res.json();
 
     return resJSON;

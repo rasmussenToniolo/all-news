@@ -1,5 +1,6 @@
 .article {
   position: relative;
+  z-index: 30;
   width: 45rem;
   display: flex;
   flex-direction: column;
@@ -32,8 +33,52 @@
   }
 
   &__image {
-    width: 38rem;
-    margin: 1rem;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin: 2rem;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: transform 200ms ease-out;
+    
+    &-img {
+      width: 38rem;
+      box-shadow: 0 0 1.5rem $light-grey;
+      border: 2px solid $light-grey;
+      width: 38rem;
+    }
+
+    &-btn {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 2rem;
+      left: 5rem;
+      font-size: 3rem;
+      letter-spacing: 1px;
+      color: $very-light-grey;
+      filter: drop-shadow(0 0 1px $heavy-grey);
+      transition: transform 200ms ease-in;
+
+      .bi {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+      
+    &:hover {
+      transform: scale(1.05);
+
+    }
   }
 
   &__description {
@@ -42,7 +87,17 @@
     color: lighten($heavy-grey, 20%);
   }
 
+  &__content {
+    font-size: 1.4rem;
+    color: $heavy-grey;
+  }
+
   &__full-article-btn {
+    position: relative;
+    left: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     margin: 1rem;
     border: 2px solid $light-grey;
@@ -52,12 +107,20 @@
     color: $heavy-grey;
     cursor: pointer;
     font-family: 'Lato', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     box-shadow: 2px 2px 1rem $light-grey;
     transition: border 100ms linear;
 
     &:hover {
       border: 2px solid $medium-grey;
+    }
+
+    .bi {
+      padding: 2px;
+      margin-left: 1rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      color: $heavy-grey;
     }
   }
 }

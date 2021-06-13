@@ -87,11 +87,11 @@ function analyzeData(data: SuccesfulNewsResponseArr) {
 export async function fetchNews(country: string, category: string) {
   try{
     const newsData: SuccesfulNewsResponseArr = await getJSON(NEWS_API_URL(country, category));
+    
 
     const analyzedData: AnalyzedNewsArr = analyzeData(newsData);
 
     return analyzedData;
-
   } catch(err) {
     throw err;
   }
