@@ -31,7 +31,7 @@ export const App = () => {
   }
 
   useEffect(() => {
-    // getNews(selectedCountry, category);
+    getNews(selectedCountry, category);
     console.log(searchQuery);
   }, [selectedCountry, category])
 

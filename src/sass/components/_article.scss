@@ -1,0 +1,63 @@
+.article {
+  position: relative;
+  width: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $heavy-grey;
+  background-color: $white;
+
+  &__title {
+    // width: 30rem;
+    // border: 2px solid black;
+    border-bottom: 1px solid $light-grey;
+    padding: 1rem 0;
+    margin-bottom: 2px;
+
+    &-text {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      font-family: 'Cormorant Garamond', serif;
+    }
+  }
+
+  &__date {
+    width: 100%;
+    margin-left: 1rem;
+    color: $medium-grey;
+    font-size: 1.4rem;
+    // border: 2px solid black;
+  }
+
+  &__image {
+    width: 38rem;
+    margin: 1rem;
+  }
+
+  &__description {
+    margin: 1rem 2rem;
+    font-size: 1.6rem;
+    color: lighten($heavy-grey, 20%);
+  }
+
+  &__full-article-btn {
+    text-decoration: none;
+    margin: 1rem;
+    border: 2px solid $light-grey;
+    border-radius: 2px;
+    background-color: $very-light-grey;
+    padding: 1rem 2rem;
+    color: $heavy-grey;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.4rem;
+    box-shadow: 2px 2px 1rem $light-grey;
+    transition: border 100ms linear;
+
+    &:hover {
+      border: 2px solid $medium-grey;
+    }
+  }
+}

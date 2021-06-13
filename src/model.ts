@@ -62,7 +62,7 @@ function analyzeData(data: SuccesfulNewsResponseArr) {
   // Articles with content and image but no description 2
   // Articles with content and description but no image 3
   // Articles with description but no image nor content 4
-  // Articles only with title 5
+  // Articles only with title (could have image) 5
 
   const analyzedDataArticles = data.articles.map(article => {
     // Algorithm to analyze article

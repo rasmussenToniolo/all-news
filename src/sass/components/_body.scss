@@ -1,18 +1,25 @@
 .body {
   z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
+  flex-wrap: wrap;
   top: 14rem;
   left: 50%;
   transform: translateX(-50%);
   border-right: 1px solid $light-grey;
   border-left: 1px solid $light-grey;
-  width: 115rem;
+  width: 110rem;
+  // width: 100%;
   margin: 2rem 0;
+  // height: 110rem;
+  // display: grid;
+  // grid-template-columns: repeat(10, 11rem);
+  // grid-template-rows: repeat(10, 11rem);
 
   &.loading {
-    display: flex;
     justify-content: center;
-    align-items: center;
     height: calc(100% - 20rem);
   }
 }

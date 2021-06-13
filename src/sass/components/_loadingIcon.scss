@@ -16,9 +16,6 @@
     &-transparent {
       z-index: 150;
       background-color: $white;
-      animation-name: orbit;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
     }
 
     &-color-box {
@@ -28,7 +25,7 @@
       height: 20.5rem;
       background-color: rgba(0,0,0, 0);
       animation-name: orbit;
-      animation-duration: 1.4s;
+      animation-duration: 900ms;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
 
