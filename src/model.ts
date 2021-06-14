@@ -1,5 +1,5 @@
 import {getJSON, timeout} from './helpers';
-import {TIMEOUT_SEC, COUNTRIES_URL, NEWS_API_URL} from './config';
+import {TIMEOUT_SEC, COUNTRIES_URL, NEWS_API_URL, NEWS_API_SEARCH_URL} from './config';
 
 
 export interface SuccesfulNewsResponseArr {
@@ -21,27 +21,9 @@ export interface SuccesfulNewsResponseArr {
 }
 
 
-export interface AnalyzedNewsArr {
-  articles: {
-    source: {
-      id?: string;
-      name: string;
-    },
-    author?: string;
-    title: string;
-    description?: string;
-    url: string;
-    urlToImage?: string;
-    publishedAt: string;
-    content?: string;
-    priority: number;
-  }[];
-}
-
-
 export async function getCountriesData(codes: string[]) {
   try {
-    const countriesData = await Promise.race([getJSON(COUNTRIES_URL(codes)), timeout(TIMEOUT_SEC)]);
+    const countriesData = await Promise.race([getJSON(COUNTRIES_URL(codes)), timeout(30)]);
     
     const countriesDataArrObj: {name: string, flag: string, code: string}[] = countriesData.map((data: {nativeName: string, flag: string, alpha2Code: string})=> ({
       name: data.nativeName,
@@ -55,43 +37,22 @@ export async function getCountriesData(codes: string[]) {
   }
 }
 
-function analyzeData(data: SuccesfulNewsResponseArr) {
-  // Analyze data to determine how much real estate should the article occupy
-
-  // Full article (image, description & content) 1
-  // Articles with content and image but no description 2
-  // Articles with content and description but no image 3
-  // Articles with description but no image nor content 4
-  // Articles only with title (could have image) 5
-
-  const analyzedDataArticles = data.articles.map(article => {
-    // Algorithm to analyze article
-    if(article.urlToImage && article.description && article.content) {
-      return {...article, priority: 1};
-    } else if(article.content && article.urlToImage) {
-      return {...article, priority: 2};
-    } else if(article.content && article.description) {
-      return {...article, priority: 3};
-    } else if(article.description) {
-      return {...article, priority: 4};
-    } else {
-      return {...article, priority: 5};
-    }
-  });
-
-  const analyzedData: AnalyzedNewsArr = {articles: analyzedDataArticles};
-
-  return analyzedData;
-}
 
 export async function fetchNews(country: string, category: string) {
   try{
-    const newsData: SuccesfulNewsResponseArr = await getJSON(NEWS_API_URL(country, category));
-    
+    const newsData: SuccesfulNewsResponseArr = await Promise.race([getJSON(NEWS_API_URL(country, category)), timeout(TIMEOUT_SEC)]);
+  
+    return newsData;
+  } catch(err) {
+    throw err;
+  }
+}
 
-    const analyzedData: AnalyzedNewsArr = analyzeData(newsData);
+export async function fetchQueryNews(query: string, category: string) {
+  try {
+    const newsData: SuccesfulNewsResponseArr = await Promise.race([getJSON(NEWS_API_SEARCH_URL(query, category)), timeout(TIMEOUT_SEC)]);
 
-    return analyzedData;
+    return newsData;
   } catch(err) {
     throw err;
   }

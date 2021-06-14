@@ -5,10 +5,12 @@ import {SearchBox} from './SearchBox';
 
 interface NavbarProps {
   setSearchQuery: (query: string) => void;
+  searchQuery: string;
   setSelectedCountry: (country: string) => void;
   selectedCountry: string;
   category: string;
   setCategory: (cat: string) => void;
+  backHome: () => void;
 }
 
 export const Navbar = (props: NavbarProps) => {
@@ -22,10 +24,10 @@ export const Navbar = (props: NavbarProps) => {
         <Selector selectedCountry={props.selectedCountry} countries={countriesArr} setCountry={props.setSelectedCountry} />
       </div>
 
-      <h1 className="navbar__title">All News</h1>
+      <h1 onClick={props.backHome} className="navbar__title">All News</h1>
 
       <div className="navbar__search-box">
-        <SearchBox setQuery={props.setSearchQuery} />
+        <SearchBox query={props.searchQuery} setQuery={props.setSearchQuery} />
       </div>
 
       <div className="navbar__categories">

@@ -16,4 +16,6 @@ const NEWS_API_KEY = '68a23fc789574f65a23b77c0de4e7aed';
 
 export const NEWS_API_URL = (country: string, category: string) => `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&pageSize=100&apiKey=${NEWS_API_KEY}`;
 
+export const NEWS_API_SEARCH_URL = (query: string, category: string) => `https://newsapi.org/v2/top-headlines?q=${query}&category=${category}&apiKey=${NEWS_API_KEY}`
+
 export {countriesArr}

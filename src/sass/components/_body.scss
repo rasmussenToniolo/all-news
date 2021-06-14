@@ -1,13 +1,9 @@
 .body {
-  position: relative;
   z-index: 15;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
-  // display: grid;
-  // grid-template-columns: 55rem 55rem;
-  // grid-template-rows: repeat(300, 100rem);
   position: absolute;
   top: 14rem;
   left: 50%;
@@ -15,15 +11,9 @@
   border-right: 1px solid $light-grey;
   border-left: 1px solid $light-grey;
   width: 110rem;
-  overflow-x: scroll;
-  // -moz-sc
-  // width: 100%;
-  margin: 2rem 0;
   height: 200%;
-  // height: 110rem;
-  // display: grid;
-  // grid-template-columns: repeat(10, 11rem);
-  // grid-template-rows: repeat(10, 11rem);
+  margin: 2rem 0;
+  overflow-x: scroll;
 
   &.loading {
     justify-content: center;

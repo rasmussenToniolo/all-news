@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { AnalyzedNewsArr } from '../model';
+import { SuccesfulNewsResponseArr } from '../model';
 import {Card} from './Helpers/Card';
 import {LoadingIcon} from './LoadingIcon';
 import {Article} from './Article';
 
 interface BodyProps {
-  data?: AnalyzedNewsArr;
+  data?: SuccesfulNewsResponseArr;
+  searchQuery: string;
+  backHome: () => void;
+  category: string;
 }
 
 
@@ -14,6 +17,21 @@ export const Body = (props: BodyProps) => {
   const [fullImgUrl, setFullImgUrl] = useState<string>();
 
   const [fullImgDiv, setFullImgDiv] = useState<any>();
+
+  const [bodyEl, setBodyEl] = useState<any>();
+
+  const [leftDisabled, setLeftDisabled] = useState<boolean>(false);
+
+  const [rightDisabled, setRightDisabled] = useState<boolean>(false);
+
+  const [amountScrolled, setAmountScrolled] = useState<number>(0);
+
+  const rootEl = document.querySelector('body')!;
+
+  let bodyElTotalWidth: number;
+  let bodyElWidth: number;
+  let rootElHeight: number;
+
 
   function handleImageExpand(url: string) {
     console.log(url);
@@ -33,38 +51,111 @@ export const Body = (props: BodyProps) => {
     }, 200)
   }
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  function scrollToBottom() {
+    window.scrollTo({
+      top: +rootElHeight,
+      behavior: 'smooth'
+    })
+  }
+
   function scrollLeft() {
-    // scroll body el left by 110rem
+    if(!bodyEl) return;
+
+    
+    bodyEl.scrollTo({
+      left: +(amountScrolled - +bodyElWidth),
+      behavior: 'smooth'
+    });
+    
+    if(amountScrolled > 0) {
+      // amountScrolled -= +bodyElWidth;
+      setAmountScrolled(prev => prev -= +bodyElWidth);
+      scrollToBottom();
+      return;
+    };
   }
 
   function scrollRight() {
-    // scroll body el right by 110rem
+    if(!bodyEl) return;
+
+    
+    bodyEl.scrollTo({
+      left: +(amountScrolled + +bodyElWidth),
+      behavior: 'smooth'
+    });
+
+    scrollToTop();
+    
+    if(amountScrolled < (bodyElTotalWidth - bodyElWidth)) {
+      // amountScrolled += +bodyElWidth;
+      setAmountScrolled(prev => prev += +bodyElWidth);
+      return;
+    };
+  }
+
+  function backHome() {
+    props.backHome();
+    setAmountScrolled(0);
+    scrollToTop();
   }
 
   useEffect(() => {
-    setFullImgDiv(document.querySelector('.body__full-img')!)
-  }, []); 
+    setFullImgDiv(document.querySelector('.body__full-img'));
+    setBodyEl(document.querySelector('.body'));
+  }, []);
+
+  useEffect(() => {
+    bodyElTotalWidth = bodyEl?.scrollWidth;
+    bodyElWidth = bodyEl?.clientWidth + 8; // The +8 is to account for border widths
+    rootElHeight = rootEl?.scrollHeight;
+  })
+
+  useEffect(() => {
+    console.log('amountScrolled updated')
+    if(amountScrolled === 0) setLeftDisabled(true);
+
+    if(amountScrolled > 0) setLeftDisabled(false);
+
+    if(amountScrolled > (bodyElTotalWidth - bodyElWidth)) setRightDisabled(true);
+
+    if(amountScrolled < (bodyElTotalWidth - bodyElWidth)) setRightDisabled(false);
+  }, [amountScrolled])
 
   return (
     <>
     <div className={`body${!props.data ? ' loading' : ''}`}>
-      {!props.data ? <LoadingIcon /> :
-        props.data.articles.map(article => (
-          <Card key={article.title}>
-            <Article onImageExpand={handleImageExpand} article={article} />
-          </Card>
-        ))
-      }
+      {!props.data ?
+        <LoadingIcon />
+        :
+        props.data.articles.length === 0 ? 
+        <div className="no-results">
+          No results for '{props.searchQuery}' in the '{props.category}' category.
+          <button onClick={backHome} className="home-btn">Back to home page</button>
+        </div>
+      :
+      props.data.articles.map(article => (
+        <Card key={`${article.title} - ${new Date().getTime()}`}>
+          <Article onImageExpand={handleImageExpand} article={article} />
+        </Card>
+      ))
+    }
     </div>
 
     <div className="scroll-controls">
-      <button onClick={scrollLeft} className="scroll-controls__left scroll-controls-btn">
+      <button disabled={leftDisabled} onClick={scrollLeft} className={`scroll-controls__left scroll-controls-btn${leftDisabled ? ' disabled' : ''}`}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-compact-left" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
         </svg>
       </button>
 
-      <button onClick={scrollRight} className="scroll-controls__right scroll-controls-btn">
+      <button disabled={rightDisabled} onClick={scrollRight} className={`scroll-controls__right scroll-controls-btn${rightDisabled ? ' disabled' : ''}`}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-compact-right" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
         </svg>

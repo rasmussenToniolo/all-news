@@ -5,8 +5,6 @@ export async function getJSON(url: string) {
   
     if(!res.ok) throw new Error(`${res.status} - ${res.statusText}`);
 
-    console.log(res);
-
     const resJSON = await res.json();
 
     return resJSON;
@@ -17,7 +15,9 @@ export async function getJSON(url: string) {
 
 export async function timeout(sec: number) {
   return new Promise((_, reject) => {
-    setTimeout(reject, sec*1000);
+    setTimeout(() => {
+      reject(new Error(`Request timedout after ${sec} seconds.`))
+    }, sec*1000);
   })
 }
 
