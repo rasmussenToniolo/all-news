@@ -10,7 +10,6 @@ export function SearchBox(props: SearchBoxProps) {
 
   function handleSearch() {
     props.setQuery(input);
-    // setInput('');
   }
 
   useEffect(() => {

@@ -9,6 +9,7 @@ interface BodyProps {
   searchQuery: string;
   backHome: () => void;
   category: string;
+  error: string;
 }
 
 
@@ -116,7 +117,13 @@ export const Body = (props: BodyProps) => {
     <>
     <div className={`body${!props.data || props.data.articles.length === 0 ? ' loading' : ''}`}>
       {!props.data ?
-        <LoadingIcon />
+        (props.error ?
+          <div className="error">
+            <p className="error__title">Something went wrong!</p>
+            <p className="error__message">Error: {props.error}</p>
+            <button onClick={backHome} className="error__btn home-btn">Retry</button>
+          </div>
+        : <LoadingIcon />)
         :
         props.data.articles.length === 0 ? 
         <div className="no-results">

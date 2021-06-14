@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 export const Article = (props: any) => {
   const date = new Date(props.article.publishedAt);

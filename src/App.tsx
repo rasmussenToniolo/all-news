@@ -14,33 +14,38 @@ export const App = () => {
 
   const [newsData, setNewsData] = useState<model.SuccesfulNewsResponseArr>();
 
+  const [error, setError] = useState<string>('');
+
   async function getNews(country: string, category: string) {
     setNewsData(undefined);
     setSearchQuery('');
+    setError('');
 
     try{
       const data = await model.fetchNews(country, category);
       setNewsData(data);
     } catch(err) {
-      console.log(err);
+      setError(err.message);
     }
   }
 
   async function getSearchNews(query: string) {
     setNewsData(undefined);
+    setError('');
 
     try {
       const data = await model.fetchQueryNews(query, category);
       setNewsData(data);
       console.log(data);
     } catch(err) {
-      console.log(err);
+      setError(err.message);
     }
   }
 
   function backHome() {
     setCategory('general');
     setSearchQuery('');
+    setError('');
     getNews(selectedCountry, category);
   }
 
@@ -71,6 +76,7 @@ export const App = () => {
         searchQuery={searchQuery}
         data={newsData}
         category={category}
+        error={error}
        />
     </>
   )
