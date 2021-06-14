@@ -1,0 +1,30 @@
+.home-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: $very-light-grey;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  border: 2px solid $light-grey;
+  border-radius: 2px;
+  box-shadow: 2px 2px 1rem $light-grey;
+  transition: all 100ms linear;
+
+  .bi {
+    width: 3rem;
+    height: 3rem;
+    color: $medium-grey;
+    margin-right: 1rem;
+    transition: color 100ms linear;
+  }
+
+  &:hover {
+    border: 2px solid $medium-grey;
+    box-shadow: 2px 2px 2rem $light-grey;
+
+    .bi {
+      color: $heavy-grey;
+    }
+  }
+}

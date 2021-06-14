@@ -118,7 +118,6 @@ export const Body = (props: BodyProps) => {
   })
 
   useEffect(() => {
-    console.log('amountScrolled updated')
     if(amountScrolled === 0) setLeftDisabled(true);
 
     if(amountScrolled > 0) setLeftDisabled(false);
@@ -130,14 +129,19 @@ export const Body = (props: BodyProps) => {
 
   return (
     <>
-    <div className={`body${!props.data ? ' loading' : ''}`}>
+    <div className={`body${!props.data || props.data.articles.length === 0 ? ' loading' : ''}`}>
       {!props.data ?
         <LoadingIcon />
         :
         props.data.articles.length === 0 ? 
         <div className="no-results">
-          No results for '{props.searchQuery}' in the '{props.category}' category.
-          <button onClick={backHome} className="home-btn">Back to home page</button>
+          No results for <span className="no-results__query no-results__var">{props.searchQuery.length > 310 ? `${props.searchQuery.slice(0, 300)}...` : props.searchQuery}</span> in the <span className="no-results__category no-results__var">{props.category}</span> category.
+          <button onClick={backHome} className="no-results__btn home-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            Back to home page
+          </button>
         </div>
       :
       props.data.articles.map(article => (

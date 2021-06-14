@@ -20,6 +20,35 @@
     height: calc(100% - 20rem);
   }
 
+  .no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 3rem;
+    line-height: 4rem;
+    color: $heavy-grey;
+
+    &__var {
+      font-style: italic;
+      font-weight: 300;
+      padding-right: .6rem;
+    }
+
+    &__category {
+      text-transform: capitalize;
+    }
+
+    &__query {
+      text-align: center;
+      margin: 0 10rem;
+    }
+
+    &__btn {
+      margin: 4rem;
+    }
+  }
+
   &__full-img {
     z-index: 40;
     position: fixed;
