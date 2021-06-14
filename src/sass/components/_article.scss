@@ -63,7 +63,8 @@
       letter-spacing: 1px;
       color: $very-light-grey;
       filter: drop-shadow(0 0 1px $heavy-grey);
-      transition: transform 200ms ease-in;
+      transition: transform 200ms ease-in, opacity 200ms linear;
+      opacity: 0;
 
       .bi {
         width: 2.5rem;
@@ -78,6 +79,9 @@
     &:hover {
       transform: scale(1.05);
 
+      .article__image-btn {
+        opacity: 1;
+      }
     }
   }
 
