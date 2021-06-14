@@ -23,11 +23,10 @@ export const Body = (props: BodyProps) => {
   const [leftDisabled, setLeftDisabled] = useState<boolean>(false);
 
   const [rightDisabled, setRightDisabled] = useState<boolean>(false);
-
-  const [amountScrolled, setAmountScrolled] = useState<number>(0);
-
+  
   const rootEl = document.querySelector('body')!;
-
+  
+  let amountScrolled = 0;
   let bodyElTotalWidth: number;
   let bodyElWidth: number;
   let rootElHeight: number;
@@ -68,64 +67,50 @@ export const Body = (props: BodyProps) => {
   function scrollLeft() {
     if(!bodyEl) return;
 
-    
     bodyEl.scrollTo({
-      left: +(amountScrolled - +bodyElWidth),
+      left: +(amountScrolled - bodyElWidth),
       behavior: 'smooth'
     });
     
     if(amountScrolled > 0) {
-      // amountScrolled -= +bodyElWidth;
-      setAmountScrolled(prev => prev -= +bodyElWidth);
+      amountScrolled -= bodyElWidth;
       scrollToBottom();
-      return;
     };
   }
 
   function scrollRight() {
     if(!bodyEl) return;
 
-    
     bodyEl.scrollTo({
-      left: +(amountScrolled + +bodyElWidth),
+      left: +(amountScrolled + bodyElWidth),
       behavior: 'smooth'
     });
 
-    scrollToTop();
-    
     if(amountScrolled < (bodyElTotalWidth - bodyElWidth)) {
-      // amountScrolled += +bodyElWidth;
-      setAmountScrolled(prev => prev += +bodyElWidth);
-      return;
+      amountScrolled += +bodyElWidth;
+      scrollToTop();
     };
   }
 
   function backHome() {
     props.backHome();
-    setAmountScrolled(0);
+    amountScrolled = 0;
     scrollToTop();
   }
-
-  useEffect(() => {
-    setFullImgDiv(document.querySelector('.body__full-img'));
-    setBodyEl(document.querySelector('.body'));
-  }, []);
 
   useEffect(() => {
     bodyElTotalWidth = bodyEl?.scrollWidth;
     bodyElWidth = bodyEl?.clientWidth + 8; // The +8 is to account for border widths
     rootElHeight = rootEl?.scrollHeight;
-  })
+    amountScrolled = 0;
+  }, [props.data]);
 
   useEffect(() => {
-    if(amountScrolled === 0) setLeftDisabled(true);
-
-    if(amountScrolled > 0) setLeftDisabled(false);
-
-    if(amountScrolled > (bodyElTotalWidth - bodyElWidth)) setRightDisabled(true);
-
-    if(amountScrolled < (bodyElTotalWidth - bodyElWidth)) setRightDisabled(false);
-  }, [amountScrolled])
+    setFullImgDiv(document.querySelector('.body__full-img'));
+    setBodyEl(document.querySelector('.body'));
+    amountScrolled = 0;
+  }, []); 
+  
 
   return (
     <>
