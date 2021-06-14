@@ -4,10 +4,6 @@ import * as model from './model';
 import {Navbar} from './components/Navbar';
 import {Body} from './components/Body';
 
-// Navbar: search!, countries!, categories!
-// Body: cards
-// Card: article popup
-// Article popup: reccomendations
 
 export const App = () => {
   const [selectedCountry, setSelectedCountry] = useState('us');
