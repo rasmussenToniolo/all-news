@@ -1,8 +1,11 @@
 import './sass/main.scss';
 import { useEffect, useState } from 'react';
 import * as model from './model';
+import { advancedData } from './model';
 import {Navbar} from './components/Navbar';
 import {Body} from './components/Body';
+
+export type {advancedData}
 
 
 export const App = () => {
@@ -42,12 +45,29 @@ export const App = () => {
     }
   }
 
+  async function handleAdvancedSearch(advancedData: advancedData) {
+    console.log(advancedData);
+    setNewsData(undefined);
+    setSearchQuery('');
+    setError('');
+
+    try {
+      const data = await model.fetchAdvanced(advancedData);
+      setNewsData(data);
+      console.log(data);
+
+    } catch(err) {
+      setError(err.message);
+    }
+  }
+
   function backHome() {
     setCategory('general');
     setSearchQuery('');
     setError('');
     getNews(selectedCountry, category);
   }
+
 
   useEffect(() => {
     getNews(selectedCountry, category);
@@ -69,6 +89,7 @@ export const App = () => {
         setSelectedCountry={setSelectedCountry}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        advancedSearch={handleAdvancedSearch}
       />
 
       <Body

@@ -95,7 +95,6 @@ export const Body = (props: BodyProps) => {
 
   function backHome() {
     props.backHome();
-    amountScrolled = 0;
     scrollToTop();
   }
 
