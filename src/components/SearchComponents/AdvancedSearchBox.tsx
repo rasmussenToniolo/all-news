@@ -52,6 +52,9 @@ export function AdvancedSearchBox(props: AdvancedSearchBoxData) {
     }, 3000);
   }
 
+  // BUG BUG BUG
+  // When enter is pressed on inputs other than the filter out words one, an 'undefined' is added to the filter out words tags 
+
   function handleSkippedWordAdd(e: any) {
     e.preventDefault();
     if(searchData.skipWords && searchData.skipWords.some((word) => word === skippedWord)) {
