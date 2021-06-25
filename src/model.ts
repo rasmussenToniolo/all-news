@@ -26,7 +26,7 @@ export interface advancedData {
   exact?: string;
   skipWords?: string[];
   mustWords?: string[];
-  onlyDomains?: string[];
+  mustDomains?: string[];
   skipDomains?: string[];
   lang?: string;
   sort?: string;

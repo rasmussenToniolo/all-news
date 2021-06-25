@@ -1,6 +1,6 @@
 import { countriesArr } from "../config";
 import { Selector } from "./Selector";
-import { SearchBox } from "./SearchBox";
+import { SearchBox } from "./SearchComponents/SearchBox";
 import {advancedData} from '../App';
 
 interface NavbarProps {
