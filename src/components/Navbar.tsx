@@ -35,7 +35,7 @@ export const Navbar = (props: NavbarProps) => {
         />
       </div>
 
-      <h1 className="navbar__title">All News</h1>
+      <h1 onClick={props.backHome} className="navbar__title">All News</h1>
 
       <div className="navbar__search-box">
         <SearchBox query={props.searchQuery} setQuery={props.setSearchQuery} handleAdvanced={props.advancedSearch} />

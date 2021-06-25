@@ -157,10 +157,10 @@ export function AdvancedSearchBox(props: AdvancedSearchBoxData) {
           </svg>
         </button>
         <form action="#" className="search-form">
-          <input value={searchData?.query || ''} onChange={(e: any) => setSearchData(prev => ({...prev, query: e.target.value}))} id="query" type="text" className="search__query--input input" placeholder="Query" />
+          <input value={searchData?.query || ''} onChange={(e: any) => setSearchData(prev => ({...prev, query: e.target.value}))} id="query" type="text" className="search__query--input input" placeholder="Query" required />
           <label htmlFor="query" className="search__query--label input-label">Query</label>
 
-          <input value={searchData?.exact || ''} onChange={(e: any) => setSearchData(prev => ({...prev, exact: e.target.value}))} id="exact-query" type="text" className="search__exact-query--input input" placeholder="Exact phrase" />
+          <input value={searchData?.exact || ''} onChange={(e: any) => setSearchData(prev => ({...prev, exact: e.target.value}))} id="exact-query" type="text" className="search__exact-query--input input" placeholder="Exact phrase" required />
           <label htmlFor="exact-query" className="search__exact-query--label input-label">Exact phrase</label>
           
           <div className="checkbox">
