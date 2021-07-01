@@ -84,6 +84,7 @@
   justify-content: center;
   align-items: center;
   transition: visibility 0s, opacity 200ms ease-in-out;
+  overflow: scroll;
 
   .search-container {
     position: relative;
@@ -148,6 +149,7 @@
           background-color: $very-light-grey;
           box-shadow: 0 .5rem 1rem $light-grey;
           transition: all 150ms linear;
+          margin-bottom: 3rem;
           
           &:hover {
             border-color: $medium-grey;
@@ -173,7 +175,6 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        max-height: 35rem;
         // border: 2px solid $medium-grey;
         overflow-y: scroll;
         margin: 2rem 0;
@@ -211,12 +212,16 @@
             border-bottom: 1px solid $light-grey;
             padding-bottom: 1rem;
 
+            @media (max-width: 1450px) {
+              flex-direction: column;
+            }
+
             &--input {
               padding: .2rem .4rem;
               font-size: 1.4rem;
               color: $heavy-grey;
               border: 1px solid $light-grey;
-              margin-right: 1rem;
+              margin: 0 1rem;
               transition: border 400ms linear;
 
               &:focus {
@@ -230,7 +235,13 @@
               background-color: $very-light-grey;
               color: $heavy-grey;
               padding: .5rem 1rem;
+              margin-right: 4px;
               cursor: pointer;
+
+              @media (max-width: 1450px) {
+                margin-top: 1rem;
+                margin-right: 0;
+              }
 
               &:hover {
                 background-color: $light-grey;
@@ -245,6 +256,10 @@
             margin-top: 1rem;
             width: 90%;
             height: 15.5rem;
+
+            @media (max-width: 1450px) {
+              margin-bottom: 1rem;
+            }
 
             &-tag {
               margin: .6rem;
