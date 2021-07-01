@@ -10,6 +10,10 @@
   justify-content: space-between;
   align-items: center;
 
+  @media (max-width: 1450px) {
+    display: none;
+  }
+
   &-btn {
     position: relative;
     top: 6rem;

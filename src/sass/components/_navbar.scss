@@ -10,7 +10,12 @@
   grid-template-rows: 8rem 6rem;
   user-select: none;
   background-color: $white;
-  // box-shadow: 0 0 2rem $light-grey;  
+  // box-shadow: 0 0 2rem $light-grey;
+
+  @media (max-width: 500px) {
+    // grid-template-rows: 14rem 6rem;
+    height: 12rem;
+  }
 
   &__selector {
     display: flex;
@@ -49,6 +54,31 @@
     align-items: center;
     margin-top: 1px;
     background-color: $white;
+
+    @media (max-width: 500px) {
+      margin-top: 20rem;
+
+      &--expand-btn {
+        visibility: visible;
+        opacity: 1;
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        top: 6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        padding: 1rem;
+
+        .bi {
+          width: 3rem;
+          height: 3rem;
+          color: $medium-grey;
+          transform: translate()
+        }
+      }
+    }
+    
     
     ul {
       box-shadow: 0 2rem 2rem -2rem $light-grey;
@@ -58,6 +88,22 @@
       padding: 0 5rem;
       background-color: $white;
       transition: color 100ms linear;
+
+      @media (max-width: 500px) {
+        border: 1px solid $light-grey;
+        border-top: 1px solid transparent;
+
+        visibility: hidden;
+        opacity: 0;
+
+        transition: color 100ms linear, visibility 0s, opacity 200ms linear;
+
+        &.visible {
+          visibility: visible;
+          opacity: 1;
+  
+        }
+      }
       
       &:hover {
         color: $heavy-grey;
@@ -73,6 +119,14 @@
         cursor: pointer;
         transition: background-color 100ms linear;
         border-radius: 2px;
+        
+        @media (max-width: 600px) {
+          margin: auto;
+        }
+        
+        @media (max-width: 500px) {
+          display: block;
+        }
 
         &:hover {
           background-color: $very-light-grey;

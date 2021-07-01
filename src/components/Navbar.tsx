@@ -2,6 +2,7 @@ import { countriesArr } from "../config";
 import { Selector } from "./Selector";
 import { SearchBox } from "./SearchComponents/SearchBox";
 import {advancedData} from '../App';
+import { useState } from "react";
 
 interface NavbarProps {
   setSearchQuery: (query: string) => void;
@@ -25,6 +26,8 @@ export const Navbar = (props: NavbarProps) => {
     "Sports",
   ];
 
+  const [catOpen, setCatOpen] = useState<boolean>(false);
+
   return (
     <div className="navbar">
       <div className="navbar__selector">
@@ -42,7 +45,12 @@ export const Navbar = (props: NavbarProps) => {
       </div>
 
       <div className="navbar__categories">
-        <ul className="navbar__categories-list">
+        <button onClick={() => setCatOpen(prev => !prev)} className="navbar__categories--expand-btn hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
+        <ul className={`navbar__categories-list ${catOpen ? 'visible' : ''}`}>
           {categories.map((cat) => (
             <li
               className={`navbar__categories-list--item${

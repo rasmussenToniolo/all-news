@@ -9,6 +9,22 @@ html {
   height: 100%;
   width: 100%;
   background-color: $white;
+
+  @media (max-width: 1450px) {
+    font-size: 50%;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 46%;
+  }
+
+  @media (max-width: 1050px) {
+    font-size: 35%;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 30%;
+  }
 }
 
 
