@@ -26,8 +26,15 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource',
+        test: /\.(?:ico|gif|png|jpg|jpeg|mov|mp4)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[hash:6].[ext]',
+          outputPath: 'img',
+          publicPath: 'img',
+          emitFile: true,
+          esModule: false
+        }
       },
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
@@ -37,7 +44,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '..', './build'),
-    filename: 'bundle.js',
+    filename: 'bundle-[hash:8].js',
   },
   plugins: [
     new HtmlWebpackPlugin({
