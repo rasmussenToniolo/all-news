@@ -7,6 +7,7 @@ interface SearchBoxProps {
   setQuery: (query: string) => void;
   query: string;
   handleAdvanced: (data: advancedData) => void;
+  onDemo: boolean;
 }
 
 export function SearchBox(props: SearchBoxProps) {
@@ -15,10 +16,14 @@ export function SearchBox(props: SearchBoxProps) {
   const [advancedOpen, setAdvancedOpen] = useState<boolean>(false);
 
   function handleSearch() {
+    if(props.onDemo) return;
+
     props.setQuery(input);
   }
 
   function handleAdvancedSearch(data: advancedData) {
+    if(props.onDemo) return;
+
     props.handleAdvanced(data);
   }
 

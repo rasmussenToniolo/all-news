@@ -10,6 +10,7 @@ interface BodyProps {
   backHome: () => void;
   category: string;
   error: string;
+  toggleDemoData: () => void;
 }
 
 
@@ -98,6 +99,10 @@ export const Body = (props: BodyProps) => {
     scrollToTop();
   }
 
+  function toggleDemoData() {
+    props.toggleDemoData();
+  }
+
   useEffect(() => {
     bodyElTotalWidth = bodyEl?.scrollWidth;
     bodyElWidth = bodyEl?.clientWidth + 8; // The +8 is to account for border widths
@@ -121,6 +126,8 @@ export const Body = (props: BodyProps) => {
             <p className="error__title">Something went wrong!</p>
             <p className="error__message">Error: {props.error}</p>
             <button onClick={backHome} className="error__btn home-btn">Retry</button>
+            <button onClick={toggleDemoData} className="error__btn home-btn">Try demo data</button>
+            <p className="error__message">(Most functions will be disabled)</p>
           </div>
         : <LoadingIcon />)
         :

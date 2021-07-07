@@ -13,6 +13,7 @@ interface NavbarProps {
   setCategory: (cat: string) => void;
   backHome: () => void;
   advancedSearch: (data: advancedData) => void;
+  onDemo: boolean;
 }
 
 export const Navbar = (props: NavbarProps) => {
@@ -41,7 +42,7 @@ export const Navbar = (props: NavbarProps) => {
       <h1 onClick={props.backHome} className="navbar__title">All News</h1>
 
       <div className="navbar__search-box">
-        <SearchBox query={props.searchQuery} setQuery={props.setSearchQuery} handleAdvanced={props.advancedSearch} />
+        <SearchBox onDemo={props.onDemo} query={props.searchQuery} setQuery={props.setSearchQuery} handleAdvanced={props.advancedSearch} />
       </div>
 
       <div className="navbar__categories">
@@ -57,7 +58,7 @@ export const Navbar = (props: NavbarProps) => {
                 props.category === cat.toLowerCase() ? " selected-cat" : ""
               }`}
               key={cat.toLowerCase()}
-              onClick={() => props.setCategory(cat.toLowerCase())}
+              onClick={() => !props.onDemo ? props.setCategory(cat.toLowerCase()) : ''}
             >
               {cat}
             </li>

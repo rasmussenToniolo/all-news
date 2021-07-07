@@ -5,6 +5,8 @@ import { advancedData } from './model';
 import {Navbar} from './components/Navbar';
 import {Body} from './components/Body';
 
+const demoData: model.SuccesfulNewsResponseArr = require('./demoData.json');
+
 export type {advancedData}
 
 
@@ -18,6 +20,8 @@ export const App = () => {
   const [newsData, setNewsData] = useState<model.SuccesfulNewsResponseArr>();
 
   const [error, setError] = useState<string>('');
+
+  const [onDemo, setOnDemo] = useState<boolean>(false);
 
   async function getNews(country: string, category: string) {
     setNewsData(undefined);
@@ -68,6 +72,12 @@ export const App = () => {
     getNews(selectedCountry, category);
   }
 
+  function toggleDemoData() {
+    // Disable all functions, only show home page on the general category
+    setNewsData(demoData);
+    setOnDemo(true);
+  }
+
 
   useEffect(() => {
     getNews(selectedCountry, category);
@@ -90,6 +100,7 @@ export const App = () => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         advancedSearch={handleAdvancedSearch}
+        onDemo={onDemo}
       />
 
       <Body
@@ -98,6 +109,7 @@ export const App = () => {
         data={newsData}
         category={category}
         error={error}
+        toggleDemoData={toggleDemoData}
        />
     </>
   )
